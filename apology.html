@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm Sorry 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --pink: #f9a8c9;
+    --deep-pink: #e05c8a;
+    --blush: #fde8f0;
+    --cream: #fff8fb;
+    --text: #5c2d4a;
+    --soft: #f2c4da;
+  }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='24' font-size='24'%3E🌸%3C/text%3E%3C/svg%3E"), auto;
+  }
+
+  /* Floating hearts background */
+  .hearts-bg {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .heart-float {
+    position: absolute;
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.4; }
+    90%  { opacity: 0.3; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Wrapper */
+  .wrapper {
+    position: relative; z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  /* SECTION: Intro */
+  .intro {
+    text-align: center;
+    padding: 60px 20px 30px;
+    animation: fadeSlideIn 1s ease both;
+  }
+  .intro .emoji-big { font-size: 5rem; display: block; margin-bottom: 12px; animation: bounce 2s ease infinite; }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    color: var(--deep-pink);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  h1 em { font-style: italic; color: #c0446c; }
+
+  .sub {
+    font-size: 1.05rem;
+    color: #a06080;
+    font-weight: 500;
+    margin-bottom: 32px;
+  }
+
+  /* SECTION: Cards */
+  .cards { display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px; }
+
+  .card {
+    background: white;
+    border-radius: 24px;
+    padding: 28px 28px 24px;
+    box-shadow: 0 4px 24px rgba(224,92,138,0.10);
+    border: 2px solid var(--soft);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    animation: fadeSlideIn 0.7s ease both;
+  }
+  .card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 12px 36px rgba(224,92,138,0.18); }
+
+  .card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 5px;
+    background: linear-gradient(90deg, var(--pink), var(--deep-pink), var(--pink));
+  }
+
+  .card-icon { font-size: 2.2rem; margin-bottom: 10px; display: block; }
+  .card h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--deep-pink); margin-bottom: 8px; }
+  .card p { font-size: 0.97rem; line-height: 1.7; color: #7a4060; }
+
+  /* Staggered card animation */
+  .card:nth-child(1) { animation-delay: 0.3s; }
+  .card:nth-child(2) { animation-delay: 0.55s; }
+  .card:nth-child(3) { animation-delay: 0.8s; }
+  .card:nth-child(4) { animation-delay: 1.05s; }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTION: Promises */
+  .promises-section {
+    background: linear-gradient(135deg, #fff0f6, #fce4ef);
+    border-radius: 28px;
+    padding: 36px 28px;
+    margin-bottom: 40px;
+    border: 2px solid var(--soft);
+    animation: fadeSlideIn 0.8s ease 1.2s both;
+  }
+  .promises-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--deep-pink);
+    margin-bottom: 22px;
+    text-align: center;
+  }
+  .promise-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .promise-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: white; border-radius: 16px; padding: 16px 18px;
+    box-shadow: 0 2px 10px rgba(224,92,138,0.08);
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    user-select: none;
+  }
+  .promise-item:hover { transform: translateX(6px); }
+  .promise-item.checked { background: #fff0f9; }
+  .promise-item.checked .check-box { background: var(--deep-pink); border-color: var(--deep-pink); }
+  .promise-item.checked .check-box::after { opacity: 1; }
+
+  .check-box {
+    width: 26px; height: 26px; min-width: 26px;
+    border-radius: 50%; border: 2.5px solid var(--pink);
+    background: white;
+    position: relative; transition: all 0.25s;
+  }
+  .check-box::after {
+    content: '✓';
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 0.85rem; font-weight: 700;
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .promise-text { font-size: 0.95rem; line-height: 1.5; color: #6a3050; padding-top: 2px; }
+
+  /* SECTION: Letter */
+  .letter-section {
+    position: relative;
+    background: white;
+    border-radius: 28px;
+    padding: 40px 32px;
+    margin-bottom: 40px;
+    border: 2px solid var(--soft);
+    box-shadow: 0 8px 40px rgba(224,92,138,0.10);
+    animation: fadeSlideIn 0.8s ease 1.5s both;
+  }
+  .letter-section::after {
+    content: '💌';
+    position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+    font-size: 2.5rem;
+    background: white; padding: 0 8px;
+  }
+  .letter-section h2 {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 1.5rem; color: var(--deep-pink);
+    text-align: center; margin-bottom: 22px; margin-top: 8px;
+  }
+  .letter-section p {
+    font-size: 0.97rem; line-height: 1.85; color: #6a3050; margin-bottom: 14px;
+  }
+  .letter-section p:last-child { margin-bottom: 0; }
+  .letter-sign {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 1.3rem; color: var(--deep-pink); text-align: right;
+    margin-top: 24px; display: block;
+  }
+
+  /* SECTION: Button */
+  .cta-section { text-align: center; animation: fadeSlideIn 0.8s ease 1.8s both; }
+
+  .hug-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--pink), var(--deep-pink));
+    color: white; font-family: 'Quicksand', sans-serif;
+    font-size: 1.05rem; font-weight: 700;
+    padding: 18px 42px; border-radius: 50px;
+    border: none; cursor: pointer;
+    box-shadow: 0 6px 24px rgba(224,92,138,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .hug-btn:hover { transform: scale(1.06); box-shadow: 0 10px 32px rgba(224,92,138,0.45); }
+  .hug-btn:active { transform: scale(0.97); }
+
+  /* Heart burst on click */
+  .burst { position: fixed; pointer-events: none; z-index: 999; font-size: 1.5rem; }
+  .burst span {
+    position: absolute;
+    animation: burst 0.8s ease forwards;
+  }
+  @keyframes burst {
+    0%   { transform: translate(0,0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(0.3); opacity: 0; }
+  }
+
+  /* Surprise popup */
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(90,20,50,0.45);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.35s;
+  }
+  .overlay.show { opacity: 1; pointer-events: all; }
+
+  .popup {
+    background: white; border-radius: 32px;
+    padding: 48px 36px; text-align: center;
+    max-width: 380px; width: 90%;
+    box-shadow: 0 24px 80px rgba(224,92,138,0.3);
+    transform: scale(0.8); transition: transform 0.35s ease;
+    border: 3px solid var(--soft);
+  }
+  .overlay.show .popup { transform: scale(1); }
+  .popup .big-heart { font-size: 4rem; display: block; animation: heartbeat 1s ease infinite; }
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.18); }
+  }
+  .popup h3 { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--deep-pink); margin: 16px 0 10px; }
+  .popup p { font-size: 0.95rem; color: #7a4060; line-height: 1.6; margin-bottom: 24px; }
+  .close-btn {
+    background: var(--blush); border: 2px solid var(--pink);
+    color: var(--deep-pink); font-family: 'Quicksand', sans-serif;
+    font-weight: 700; font-size: 1rem;
+    padding: 12px 30px; border-radius: 50px; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .close-btn:hover { background: var(--soft); }
+
+  /* Progress bar */
+  .promise-progress {
+    text-align: center; font-size: 0.9rem; color: #a06080;
+    margin-top: 16px; font-weight: 600;
+  }
+  .progress-bar-wrap {
+    height: 8px; background: var(--blush); border-radius: 8px; margin-top: 8px; overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--pink), var(--deep-pink));
+    border-radius: 8px; transition: width 0.4s ease;
+  }
+
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s, transform 0.6s; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- Floating hearts -->
+<div class="hearts-bg" id="heartsbg"></div>
+
+<!-- MAIN CONTENT -->
+<div class="wrapper">
+
+  <!-- Intro -->
+  <div class="intro">
+    <span class="emoji-big">🌸</span>
+    <h1>I'm <em>truly</em><br>sorry, my love</h1>
+    <p class="sub">This comes straight from my heart — no excuses, just honesty.</p>
+  </div>
+
+  <!-- Cards -->
+  <div class="cards">
+    <div class="card">
+      <span class="card-icon">👂</span>
+      <h2>I didn't listen the way you deserved</h2>
+      <p>You came to me with your heart open, wanting to be heard — and I let my mind wander, I brushed things off, I didn't give you the full attention you deserved. That wasn't fair to you, and I am truly sorry for every moment you felt invisible or unheard.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">💔</span>
+      <h2>I let you down, and I own that</h2>
+      <p>There have been too many moments where you counted on me and I wasn't there — not fully. You deserve someone who shows up, and I've fallen short. I'm not making excuses. I let you down and that hurts me deeply knowing how much it must have hurt you.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🌱</span>
+      <h2>I want to grow — for you & for us</h2>
+      <p>I know sorry without change means nothing. So this isn't just words — it's a commitment to be more present, more thoughtful, and more worthy of your love every single day.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">✨</span>
+      <h2>You deserve so much better</h2>
+      <p>You are patient, loving, and incredible — and you've given me so much grace. I don't take that for granted anymore. You deserve a partner who matches your love, and I'm choosing every day to be that person.</p>
+    </div>
+  </div>
+
+  <!-- Promises -->
+  <div class="promises-section reveal">
+    <h2>My Promises to You 💕</h2>
+    <ul class="promise-list" id="promiseList">
+      <li class="promise-item" onclick="togglePromise(this)">
+        <div class="check-box"></div>
+        <span class="promise-text">I will put my phone down and truly listen when you speak — no distractions.</span>
+      </li>
+      <li class="promise-item" onclick="togglePromise(this)">
+        <div class="check-box"></div>
+        <span class="promise-text">I will ask how you're feeling — and actually wait to hear your whole answer.</span>
+      </li>
+      <li class="promise-item" onclick="togglePromise(this)">
+        <div class="check-box"></div>
+        <span class="promise-text">I will never make you feel like your feelings are too much or unimportant.</span>
+      </li>
+      <li class="promise-item" onclick="togglePromise(this)">
+        <div class="check-box"></div>
+        <span class="promise-text">I will keep my word — when I say I'll do something, I will do it.</span>
+      </li>
+      <li class="promise-item" onclick="togglePromise(this)">
+        <div class="check-box"></div>
+        <span class="promise-text">I will remind you every single day how loved and valued you are.</span>
+      </li>
+      <li class="promise-item" onclick="togglePromise(this)">
+        <div class="check-box"></div>
+        <span class="promise-text">I will choose us — again and again, no matter what.</span>
+      </li>
+    </ul>
+    <div class="promise-progress" id="progressText">Tap each promise to lock it in 💗</div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+  </div>
+
+  <!-- Letter -->
+  <div class="letter-section reveal">
+    <h2>A Letter From My Heart</h2>
+    <p>My love,</p>
+    <p>I've been sitting with this for a while now, trying to find the right words — because you deserve words that are real, not just pretty. The truth is, I haven't been the partner you deserve. I've let you talk and not truly listened. I've let you down at moments when you needed me most. And I know that kind of hurt doesn't just disappear with an "I'm sorry."</p>
+    <p>But I want you to know — I see it. I see the patience you've poured into us, the love you've given even when I didn't reflect it back the way I should have. And it breaks my heart knowing I made you feel unseen or unimportant, even for a second.</p>
+    <p>I'm choosing to be better. Not because I have to — but because <em>you</em> make me want to be. Because you are worth every bit of effort, every uncomfortable moment of growth, every promise I will fight to keep.</p>
+    <p>You are my favourite person. And I'm going to spend every day making sure you feel exactly that.</p>
+    <span class="letter-sign">Forever yours 🌹</span>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section reveal">
+    <button class="hug-btn" onclick="sendHug(event)">Send me a virtual hug 🤗</button>
+  </div>
+
+</div><!-- /wrapper -->
+
+<!-- Popup -->
+<div class="overlay" id="overlay" onclick="closePopup(event)">
+  <div class="popup">
+    <span class="big-heart">💖</span>
+    <h3>Hug received!</h3>
+    <p>Thank you for your grace. I promise to be the person you deserve — today, tomorrow, and every day after. I love you so much. 🌸</p>
+    <button class="close-btn" onclick="document.getElementById('overlay').classList.remove('show')">Close 💕</button>
+  </div>
+</div>
+
+<script>
+  // Floating hearts
+  const emojis = ['💕','🌸','💖','🌷','✨','💗','🌺','💝','🫶'];
+  const bg = document.getElementById('heartsbt') || document.getElementById('heartsbt');
+  const heartsContainer = document.querySelector('.hearts-bg');
+  for (let i = 0; i < 22; i++) {
+    const el = document.createElement('div');
+    el.className = 'heart-float';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.animationDuration = (12 + Math.random() * 16) + 's';
+    el.style.animationDelay = (Math.random() * 18) + 's';
+    el.style.fontSize = (0.8 + Math.random() * 1.4) + 'rem';
+    heartsContainer.appendChild(el);
+  }
+
+  // Promise checker
+  function togglePromise(el) {
+    el.classList.toggle('checked');
+    updateProgress();
+  }
+  function updateProgress() {
+    const all = document.querySelectorAll('.promise-item');
+    const done = document.querySelectorAll('.promise-item.checked').length;
+    const pct = Math.round((done / all.length) * 100);
+    document.getElementById('progressBar').style.width = pct + '%';
+    if (done === 0) {
+      document.getElementById('progressText').textContent = 'Tap each promise to lock it in 💗';
+    } else if (done < all.length) {
+      document.getElementById('progressText').textContent = `${done} of ${all.length} promises locked in 💕`;
+    } else {
+      document.getElementById('progressText').textContent = 'All promises locked in! I mean every one 💖';
+    }
+  }
+
+  // Hug button
+  function sendHug(e) {
+    // burst hearts
+    const btn = e.currentTarget;
+    const rect = btn.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const burstEl = document.createElement('div');
+    burstEl.className = 'burst';
+    burstEl.style.left = cx + 'px';
+    burstEl.style.top = cy + 'px';
+    const burstEmojis = ['💖','💕','🌸','✨','💗','🌺'];
+    for (let i = 0; i < 12; i++) {
+      const s = document.createElement('span');
+      s.textContent = burstEmojis[Math.floor(Math.random() * burstEmojis.length)];
+      const angle = (i / 12) * 360;
+      const dist = 80 + Math.random() * 60;
+      const rad = angle * Math.PI / 180;
+      s.style.setProperty('--dx', Math.cos(rad) * dist + 'px');
+      s.style.setProperty('--dy', Math.sin(rad) * dist + 'px');
+      s.style.animationDelay = Math.random() * 0.1 + 's';
+      burstEl.appendChild(s);
+    }
+    document.body.appendChild(burstEl);
+    setTimeout(() => burstEl.remove(), 900);
+
+    // show popup
+    setTimeout(() => {
+      document.getElementById('overlay').classList.add('show');
+    }, 300);
+  }
+
+  function closePopup(e) {
+    if (e.target === document.getElementById('overlay')) {
+      document.getElementById('overlay').classList.remove('show');
+    }
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
